@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Plane, Compass, Sparkles, ChevronRight } from 'lucide-react';
+import { Compass, Sparkles, ChevronRight } from 'lucide-react';
+import { AirplaneCanvas3D } from './AirplaneCanvas3D';
 
 export function SplashScreen() {
   const [progress, setProgress] = useState(0);
@@ -29,16 +30,16 @@ export function SplashScreen() {
     };
     window.addEventListener('resize', handleResize);
 
-    // 50 floating golden stardust particles
-    const particles = Array.from({ length: 55 }, () => ({
+    // 60 floating golden and cyan stardust particles
+    const particles = Array.from({ length: 60 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * 1.8 + 0.6,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: -Math.random() * 0.6 - 0.2, // Drift upward
+      radius: Math.random() * 2 + 0.5,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: -Math.random() * 0.7 - 0.2, // Drift upward
       alpha: Math.random() * 0.7 + 0.2,
       pulseSpeed: Math.random() * 0.02 + 0.01,
-      color: Math.random() > 0.4 ? '#b89047' : '#52b788',
+      color: Math.random() > 0.35 ? '#b89047' : '#38bdf8',
     }));
 
     const render = () => {
@@ -49,11 +50,10 @@ export function SplashScreen() {
         p.y += p.vy;
         p.alpha += p.pulseSpeed;
 
-        if (p.alpha > 0.85 || p.alpha < 0.15) {
+        if (p.alpha > 0.9 || p.alpha < 0.15) {
           p.pulseSpeed = -p.pulseSpeed;
         }
 
-        // Wrap around screen edges
         if (p.y < 0) p.y = height;
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
@@ -82,7 +82,7 @@ export function SplashScreen() {
   // 10-Second Telemetry Counter
   useEffect(() => {
     const totalDuration = 10000;
-    const intervalTime = 50; // Smooth 50ms updates
+    const intervalTime = 40; // 40ms updates for ultra-smooth 60fps flight trajectory
     const increment = 100 / (totalDuration / intervalTime);
 
     const progressTimer = setInterval(() => {
@@ -106,11 +106,10 @@ export function SplashScreen() {
       });
     }, 1000);
 
-    // Staged Choreography across 10 Seconds
-    const s2 = setTimeout(() => setStage(2), 2400); // 2.4s: Emblem & Golden Rings emerge
-    const s3 = setTimeout(() => setStage(3), 5200); // 5.2s: Brand Typography & Slogan
-    const s4 = setTimeout(() => setStage(4), 8400); // 8.4s: Gateway Harmonization
-    const end = setTimeout(() => setIsDone(true), 10000); // 10s: Portal dissolves
+    const s2 = setTimeout(() => setStage(2), 2400); // 2.4s: Logo & Astrolabe
+    const s3 = setTimeout(() => setStage(3), 5200); // 5.2s: Brand typography
+    const s4 = setTimeout(() => setStage(4), 8400); // 8.4s: Gateway portal
+    const end = setTimeout(() => setIsDone(true), 10000); // 10s: Fade out
 
     return () => {
       clearInterval(progressTimer);
@@ -131,65 +130,39 @@ export function SplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050b14] text-white overflow-hidden select-none transition-all duration-1000 ease-in-out ${
-        progress >= 100 ? 'opacity-0 scale-105 blur-md pointer-events-none' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#040810] text-white overflow-hidden select-none transition-all duration-1000 ease-in-out ${
+        progress >= 100 ? 'opacity-0 scale-105 blur-lg pointer-events-none' : 'opacity-100 scale-100'
       }`}
+      style={{ perspective: '1400px' }}
     >
-      {/* HTML5 Canvas for Floating Stardust Motes */}
+      {/* HTML5 Canvas Particle Engine */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-10" />
 
-      {/* Atmospheric Radial Light Caustics */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(184,144,71,0.12)_0%,_rgba(27,67,50,0.18)_40%,_rgba(5,11,20,0.98)_100%)] pointer-events-none z-0" />
+      {/* Atmospheric Radial Caustics & Sky Horizon Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,_rgba(184,144,71,0.15)_0%,_rgba(27,67,50,0.22)_35%,_rgba(4,8,16,0.98)_100%)] pointer-events-none z-0" />
 
-      {/* Ultra Fine Architectural Grid Lines */}
+      {/* High-Altitude Horizon Glow */}
+      <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[1100px] h-64 bg-gradient-to-t from-emerald-500/10 via-cyan-500/5 to-transparent blur-3xl pointer-events-none" />
+
+      {/* Passing Atmospheric 3D Cloud Wisps */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-        }}
+        className="absolute top-1/3 -left-40 w-[600px] h-44 bg-white/[0.025] rounded-full blur-3xl pointer-events-none transition-transform duration-[10000ms]"
+        style={{ transform: `translateX(${progress * 6}px)` }}
+      />
+      <div
+        className="absolute top-1/2 -right-40 w-[700px] h-52 bg-emerald-300/[0.02] rounded-full blur-3xl pointer-events-none transition-transform duration-[10000ms]"
+        style={{ transform: `translateX(${-progress * 5}px)` }}
       />
 
-      {/* Luxury Golden Flight Arc & Ascending Jet */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
-          <path
-            d="M -150 650 Q 400 500, 750 240 T 1350 40"
-            stroke="url(#luxuryFlightGrad)"
-            strokeWidth="1.8"
-            strokeDasharray="6 6"
-            className="opacity-40"
-          />
-          <defs>
-            <linearGradient id="luxuryFlightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2d6a4f" stopOpacity="0" />
-              <stop offset="45%" stopColor="#b89047" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#e6f4ea" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {/* Dynamic Jet Trajectory with Starlight Beam */}
-        <div
-          className="absolute text-amber-200 transition-all duration-[10000ms] ease-out pointer-events-none"
-          style={{
-            left: `${Math.min(progress * 1.08, 102)}%`,
-            top: `${Math.max(68 - progress * 0.62, 6)}%`,
-            transform: `rotate(${Math.min(-18 - progress * 0.12, -32)}deg) scale(1.35)`,
-          }}
-        >
-          <div className="relative">
-            <Plane size={24} className="fill-[#b89047] text-[#b89047] filter drop-shadow-[0_0_14px_#b89047]" />
-            <span className="absolute -bottom-1 -left-4 w-12 h-[2px] bg-gradient-to-l from-[#b89047] via-emerald-400 to-transparent blur-[1px] opacity-90" />
-          </div>
-        </div>
-      </div>
+      {/* ========================================================================= */}
+      {/* 3D HARDWARE-ACCELERATED WEBGL AIRLINER & TWIN CONTRAIL FLIGHT SYSTEM */}
+      {/* ========================================================================= */}
+      <AirplaneCanvas3D progress={progress} />
 
       {/* Top Header Row with Chrono Counter & Skip Option */}
       <div className="absolute top-8 left-8 right-8 z-30 flex items-center justify-between">
-        <div className="flex items-center gap-2.5 text-xs text-amber-200/70 font-mono tracking-widest uppercase">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+        <div className="flex items-center gap-2.5 text-xs text-amber-200/75 font-mono tracking-widest uppercase">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
           <span>Glady&apos;s Heaven &bull; Luxury Travel Suite</span>
         </div>
 
