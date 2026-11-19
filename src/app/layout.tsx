@@ -2,19 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Dayoff Journeys | Curated Travel Experiences & South India Tour Packages",
+  title: "Glady's Heaven | Travel Beyond Dreams - Curated Holidays & Tour Packages",
   description:
-    "Explore breathtaking hill stations, serene backwaters, and sacred pilgrimage paths with Dayoff Journeys. Customized tour packages, premium fleet services, and 24/7 dedicated support across Kerala and South India.",
+    "Explore breathtaking hill stations, serene backwaters, and sacred pilgrimage paths with Glady's Heaven. Customized tour packages, premium fleet services, and 24/7 dedicated support.",
   keywords: [
-    "Dayoff Journeys",
+    "Glady's Heaven",
+    "Gladys Heaven",
+    "Travel Beyond Dreams",
     "Kerala Tour Packages",
     "Munnar Tour",
     "Ooty Packages",
     "Kodaikanal Holidays",
     "Sacred Paths India",
-    "South India Paradise",
-    "Taxi Services Kerala",
-    "Houseboat Alleppey",
   ],
 };
 

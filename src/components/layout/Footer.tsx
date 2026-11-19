@@ -36,11 +36,29 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Top 4 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-gray-100">
-          {/* Column 1: Reach Us */}
+          {/* Column 1: Reach Us & Brand */}
           <div className="space-y-4">
-            <h4 className="text-base font-bold text-[#111827]">Reach Us</h4>
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white shadow-sm border border-gray-100 flex items-center justify-center p-0.5">
+                <Image
+                  src="/images/logo.jpg"
+                  alt="Glady's Heaven Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain w-full h-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg font-serif font-extrabold text-[#0f1e36]">
+                  Glady&apos;s <span className="text-[#b89047]">Heaven</span>
+                </span>
+                <span className="text-[9px] font-semibold tracking-wider text-[#b89047] uppercase leading-none">
+                  Travel Beyond Dreams
+                </span>
+              </div>
+            </Link>
 
-            <div className="space-y-3 text-sm">
+            <div className="space-y-3 text-sm pt-2">
               <a
                 href="mailto:info@dayoffjourneys.com"
                 className="flex items-center gap-3 text-gray-600 hover:text-[#1b4332] transition group"
@@ -137,12 +155,12 @@ export function Footer() {
             <h4 className="text-base font-bold text-[#111827]">
               Follow Our Adventures{' '}
               <a
-                href="https://www.instagram.com/dayoffjourneys/"
+                href="https://www.instagram.com/gladysheaven/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#1b4332] hover:underline"
               >
-                @DayoffJourneys
+                @GladysHeaven
               </a>
             </h4>
           </div>
@@ -177,7 +195,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>&copy; {new Date().getFullYear()} Dayoff Journeys. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Glady&apos;s Heaven. All rights reserved.</p>
 
           <p>
             Designed &amp; Developed by{' '}

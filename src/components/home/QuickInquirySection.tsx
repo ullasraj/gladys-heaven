@@ -22,7 +22,7 @@ export function QuickInquirySection() {
   const handleStartWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     const fullName = `${firstName} ${lastName}`.trim() || 'Traveler';
-    const text = `Hello Dayoff Journeys! I would like to plan my vacation with you.\nName: ${fullName}\nDestination: ${destination}\nTravel Dates: ${travelDates || 'Flexible'}\nNotes: ${message || 'Please send customized package details.'}`;
+    const text = `Hello Glady's Heaven! I would like to plan my vacation with you.\nName: ${fullName}\nDestination: ${destination}\nTravel Dates: ${travelDates || 'Flexible'}\nNotes: ${message || 'Please send customized package details.'}`;
     window.open(createWhatsAppLink(text), '_blank');
   };
 

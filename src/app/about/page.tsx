@@ -16,9 +16,9 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 
 export const metadata = {
-  title: 'About Us | Dayoff Journeys - Curated Kerala & South India Travel',
+  title: "About Us | Glady's Heaven - Travel Beyond Dreams",
   description:
-    'Learn about Dayoff Journeys, headquartered in Chappanangadi, Kerala. We specialize in bespoke holiday planning, dedicated fleet services, and sacred pilgrimages across India.',
+    "Learn about Glady's Heaven. We specialize in bespoke holiday planning, dedicated fleet services, and sacred pilgrimages across India.",
 };
 
 export default function AboutPage() {
@@ -33,10 +33,10 @@ export default function AboutPage() {
             Our Story &amp; Ethos
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black">
-            About Dayoff Journeys
+            About Glady&apos;s Heaven
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Born from a deep love for travel and Kerala&apos;s timeless landscapes, we believe your precious days off should be filled with discovery, serenity, and genuine local warmth.
+            Born from a deep love for travel and timeless landscapes, we believe your precious days off should be filled with discovery, serenity, and genuine local warmth.
           </p>
         </div>
       </section>

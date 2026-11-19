@@ -65,7 +65,7 @@ export default function ContactPage() {
             We Are Here To Help
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black">
-            Contact Dayoff Journeys
+            Contact Glady&apos;s Heaven
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
             Get personalized tour recommendations, instant quotation requests, or vehicle availability within minutes.

@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -40,33 +41,35 @@ export function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-3.5'
-          : 'bg-white/95 backdrop-blur-sm border-b border-gray-100/60 py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3'
+          : 'bg-white/95 backdrop-blur-sm border-b border-gray-100/60 py-3.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo */}
+        {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-[#1b4332] flex items-center justify-center text-white shadow-md shadow-[#1b4332]/20 group-hover:scale-105 transition-transform">
-            <svg
-              className="w-6 h-6 text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-              <circle cx="17.5" cy="6.5" r="2.5" />
-            </svg>
+          <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-white shadow-sm border border-gray-100 flex items-center justify-center p-0.5 group-hover:scale-105 transition-transform">
+            <Image
+              src="/images/logo.jpg"
+              alt="Glady's Heaven Logo"
+              width={48}
+              height={48}
+              priority
+              className="object-contain w-full h-full"
+            />
           </div>
+
           <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-[#111827] leading-none">
-              DAYOFF
-            </span>
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#2d6a4f] uppercase leading-tight">
-              JOURNEYS
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-2xl font-serif font-extrabold tracking-tight text-[#0f1e36]">
+                Glady&apos;s
+              </span>
+              <span className="text-xl sm:text-2xl font-serif font-bold text-[#b89047]">
+                Heaven
+              </span>
+            </div>
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-[#b89047] uppercase leading-tight -mt-0.5">
+              Travel Beyond Dreams
             </span>
           </div>
         </Link>

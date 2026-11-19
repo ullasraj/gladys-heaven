@@ -8,7 +8,7 @@ const slides = [
   {
     id: 1,
     tag: 'Explore All',
-    title: 'DayOff Journeys',
+    title: "Glady's Heaven",
     headline: 'Explore India, One Destination at a Time',
     subtitle: 'Discover breathtaking destinations crafted for every kind of traveler.',
     image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2000&q=85',
@@ -17,7 +17,7 @@ const slides = [
   {
     id: 2,
     tag: 'Trending Now',
-    title: 'DayOff Journeys',
+    title: "Glady's Heaven",
     headline: 'Travel What Everyone’s Talking About',
     subtitle: 'Explore the most loved and trending travel experiences of the season.',
     image: 'https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=2000&q=85',
@@ -26,7 +26,7 @@ const slides = [
   {
     id: 3,
     tag: 'Spiritual Journey',
-    title: 'DayOff Journeys',
+    title: "Glady's Heaven",
     headline: 'Discover India’s Sacred Paths',
     subtitle: 'Begin a soulful journey to sacred places that inspire peace and devotion.',
     image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=85',
