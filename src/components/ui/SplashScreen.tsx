@@ -1,35 +1,103 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Plane, Sparkles, Compass } from 'lucide-react';
+import { Plane, Compass, Sparkles, ChevronRight } from 'lucide-react';
 
 export function SplashScreen() {
   const [progress, setProgress] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [secondsRemaining, setSecondsRemaining] = useState(10);
   const [isDone, setIsDone] = useState(false);
-  const [phase, setPhase] = useState<'intro' | 'logo' | 'brand' | 'ready'>('intro');
+  const [stage, setStage] = useState<1 | 2 | 3 | 4>(1);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Floating Golden Dust Particle Canvas Animation
   useEffect(() => {
-    // 10-second total duration: 100 updates of 100ms
-    const interval = 100;
-    const totalDuration = 10000;
-    const step = 100 / (totalDuration / interval);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const timer = setInterval(() => {
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 50 floating golden stardust particles
+    const particles = Array.from({ length: 55 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.8 + 0.6,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -Math.random() * 0.6 - 0.2, // Drift upward
+      alpha: Math.random() * 0.7 + 0.2,
+      pulseSpeed: Math.random() * 0.02 + 0.01,
+      color: Math.random() > 0.4 ? '#b89047' : '#52b788',
+    }));
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha += p.pulseSpeed;
+
+        if (p.alpha > 0.85 || p.alpha < 0.15) {
+          p.pulseSpeed = -p.pulseSpeed;
+        }
+
+        // Wrap around screen edges
+        if (p.y < 0) p.y = height;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
+        ctx.shadowBlur = p.radius * 4;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // 10-Second Telemetry Counter
+  useEffect(() => {
+    const totalDuration = 10000;
+    const intervalTime = 50; // Smooth 50ms updates
+    const increment = 100 / (totalDuration / intervalTime);
+
+    const progressTimer = setInterval(() => {
       setProgress((prev) => {
-        const next = prev + step;
+        const next = prev + increment;
         if (next >= 100) {
-          clearInterval(timer);
+          clearInterval(progressTimer);
           return 100;
         }
         return next;
       });
-    }, interval);
+    }, intervalTime);
 
-    // 1-second countdown timer
     const countdownTimer = setInterval(() => {
-      setTimeLeft((prev) => {
+      setSecondsRemaining((prev) => {
         if (prev <= 1) {
           clearInterval(countdownTimer);
           return 0;
@@ -38,19 +106,19 @@ export function SplashScreen() {
       });
     }, 1000);
 
-    // Choreographed animation phases across 10 seconds:
-    const t1 = setTimeout(() => setPhase('logo'), 2200);   // Logo aura reveals
-    const t2 = setTimeout(() => setPhase('brand'), 5000);  // Typography & tagline
-    const t3 = setTimeout(() => setPhase('ready'), 8500);  // Final portal glow
-    const t4 = setTimeout(() => setIsDone(true), 10000);   // Complete exit at 10s
+    // Staged Choreography across 10 Seconds
+    const s2 = setTimeout(() => setStage(2), 2400); // 2.4s: Emblem & Golden Rings emerge
+    const s3 = setTimeout(() => setStage(3), 5200); // 5.2s: Brand Typography & Slogan
+    const s4 = setTimeout(() => setStage(4), 8400); // 8.4s: Gateway Harmonization
+    const end = setTimeout(() => setIsDone(true), 10000); // 10s: Portal dissolves
 
     return () => {
-      clearInterval(timer);
+      clearInterval(progressTimer);
       clearInterval(countdownTimer);
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
+      clearTimeout(s2);
+      clearTimeout(s3);
+      clearTimeout(s4);
+      clearTimeout(end);
     };
   }, []);
 
@@ -63,132 +131,184 @@ export function SplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#070e1a] text-white overflow-hidden transition-all duration-1000 ease-in-out ${
-        progress >= 100 ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050b14] text-white overflow-hidden select-none transition-all duration-1000 ease-in-out ${
+        progress >= 100 ? 'opacity-0 scale-105 blur-md pointer-events-none' : 'opacity-100 scale-100'
       }`}
     >
-      {/* Dynamic Starlight Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#11233d] via-[#081220] to-[#040810]" />
+      {/* HTML5 Canvas for Floating Stardust Motes */}
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-10" />
 
-      {/* Floating Animated Nebula Clouds */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/15 rounded-full blur-[100px] animate-pulse pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/15 rounded-full blur-[100px] animate-pulse delay-1000 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#b89047]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Atmospheric Radial Light Caustics */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(184,144,71,0.12)_0%,_rgba(27,67,50,0.18)_40%,_rgba(5,11,20,0.98)_100%)] pointer-events-none z-0" />
 
-      {/* Twinkling Star Points */}
-      <div className="absolute top-1/4 left-1/5 w-1.5 h-1.5 bg-amber-200 rounded-full animate-ping opacity-75" />
-      <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-emerald-300 rounded-full animate-ping delay-500 opacity-60" />
-      <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-white rounded-full animate-ping delay-1000 opacity-80" />
-      <div className="absolute bottom-1/3 right-1/5 w-1.5 h-1.5 bg-amber-100 rounded-full animate-ping delay-700 opacity-70" />
+      {/* Ultra Fine Architectural Grid Lines */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+        }}
+      />
 
-      {/* Animated Airplane Flight Path (Swooshing across over 10s) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <svg className="w-full h-full opacity-35" viewBox="0 0 1000 600" fill="none">
+      {/* Luxury Golden Flight Arc & Ascending Jet */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
           <path
-            d="M -100 500 C 300 450, 400 150, 1100 50"
-            stroke="url(#flightGrad)"
-            strokeWidth="2.5"
-            strokeDasharray="8 8"
+            d="M -150 650 Q 400 500, 750 240 T 1350 40"
+            stroke="url(#luxuryFlightGrad)"
+            strokeWidth="1.8"
+            strokeDasharray="6 6"
+            className="opacity-40"
           />
           <defs>
-            <linearGradient id="flightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2d6a4f" stopOpacity="0.1" />
-              <stop offset="50%" stopColor="#b89047" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#25D366" stopOpacity="1" />
+            <linearGradient id="luxuryFlightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#2d6a4f" stopOpacity="0" />
+              <stop offset="45%" stopColor="#b89047" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#e6f4ea" stopOpacity="1" />
             </linearGradient>
           </defs>
         </svg>
 
-        {/* Flight Jet with Glowing Tail */}
+        {/* Dynamic Jet Trajectory with Starlight Beam */}
         <div
-          className="absolute text-amber-300 transition-all duration-[10000ms] ease-out"
+          className="absolute text-amber-200 transition-all duration-[10000ms] ease-out pointer-events-none"
           style={{
-            left: `${Math.min(progress * 1.1, 102)}%`,
-            top: `${Math.max(70 - progress * 0.65, 8)}%`,
-            transform: `rotate(${Math.min(-15 - progress * 0.15, -30)}deg) scale(1.3)`,
+            left: `${Math.min(progress * 1.08, 102)}%`,
+            top: `${Math.max(68 - progress * 0.62, 6)}%`,
+            transform: `rotate(${Math.min(-18 - progress * 0.12, -32)}deg) scale(1.35)`,
           }}
         >
           <div className="relative">
-            <Plane size={28} className="fill-amber-300 filter drop-shadow-[0_0_12px_#b89047]" />
-            <span className="absolute -bottom-1 -left-3 w-8 h-1 bg-gradient-to-l from-amber-400 to-transparent blur-[1px] opacity-80" />
+            <Plane size={24} className="fill-[#b89047] text-[#b89047] filter drop-shadow-[0_0_14px_#b89047]" />
+            <span className="absolute -bottom-1 -left-4 w-12 h-[2px] bg-gradient-to-l from-[#b89047] via-emerald-400 to-transparent blur-[1px] opacity-90" />
           </div>
         </div>
       </div>
 
-      {/* Skip Button on Top-Right */}
-      <button
-        onClick={handleSkip}
-        className="absolute top-8 right-8 z-50 px-4 py-2 rounded-full bg-white/10 hover:bg-white/25 text-white/80 hover:text-white text-xs font-semibold backdrop-blur-md border border-white/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
-      >
-        <span>Skip Intro</span>
-        <span className="text-[10px] text-amber-300 font-mono">({timeLeft}s)</span>
-      </button>
+      {/* Top Header Row with Chrono Counter & Skip Option */}
+      <div className="absolute top-8 left-8 right-8 z-30 flex items-center justify-between">
+        <div className="flex items-center gap-2.5 text-xs text-amber-200/70 font-mono tracking-widest uppercase">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <span>Glady&apos;s Heaven &bull; Luxury Travel Suite</span>
+        </div>
 
-      {/* Main Core Animated Content */}
-      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-lg mx-auto">
-        {/* Animated Expanding Rings around Logo */}
-        <div className="relative mb-6">
-          {/* Pulsing Aura Rings */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-amber-500/20 via-emerald-500/20 to-amber-500/20 animate-ping opacity-40 blur-md" />
-          <div className="absolute -inset-4 rounded-full border border-amber-400/30 animate-spin-slow opacity-60" />
-          <div className="absolute -inset-8 rounded-full border border-dashed border-emerald-400/20 animate-spin-slow opacity-40" />
+        <button
+          onClick={handleSkip}
+          className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 text-white/70 hover:text-white text-xs font-semibold backdrop-blur-md border border-white/15 transition-all hover:scale-105 active:scale-95 shadow-sm"
+        >
+          <span>Skip Experience</span>
+          <span className="text-[10px] text-amber-300 font-mono">({secondsRemaining}s)</span>
+          <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
 
-          {/* Logo Card with 3D Float */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-white/95 to-slate-100 p-2 shadow-[0_0_50px_rgba(184,144,71,0.35)] border border-amber-300/40 flex items-center justify-center transform transition-all duration-700 hover:scale-105">
+      {/* Core Center Presentation */}
+      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-xl mx-auto">
+        {/* Precision Astrolabe / Celestial Rotating Rings */}
+        <div className="relative w-44 h-44 sm:w-48 sm:h-48 mb-8 flex items-center justify-center">
+          {/* Outer Celestial Compass Ring */}
+          <div className="absolute inset-0 rounded-full border border-amber-400/20 animate-spin-slow opacity-60" />
+          {/* Inner Geodetic Dotted Ring (Reverse Rotation) */}
+          <div
+            className="absolute inset-3 rounded-full border border-dashed border-emerald-400/25 opacity-50"
+            style={{ animation: 'spinSlow 24s linear infinite reverse' }}
+          />
+          {/* Ambient Glowing Halo */}
+          <div className="absolute inset-6 rounded-full bg-gradient-to-tr from-amber-500/20 via-emerald-500/15 to-transparent blur-xl animate-pulse-glow" />
+
+          {/* Compass Axis Crosshairs */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-amber-200 to-transparent" />
+            <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-amber-200 to-transparent" />
+          </div>
+
+          {/* Centered Luxury Logo Frame */}
+          <div
+            className={`relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-white/95 to-slate-100 p-2 shadow-[0_0_60px_rgba(184,144,71,0.35)] border border-amber-300/40 flex items-center justify-center transform transition-all duration-1000 ${
+              stage >= 2 ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+            }`}
+          >
             <Image
               src="/images/logo.jpg"
               alt="Glady's Heaven"
-              width={120}
-              height={120}
+              width={124}
+              height={124}
               priority
               className="object-contain w-full h-full rounded-2xl"
             />
           </div>
         </div>
 
-        {/* Brand Name Typography with Shimmer Entrance */}
-        <div className="overflow-hidden mb-2">
-          <h1 className="text-4xl sm:text-5xl font-serif font-extrabold tracking-tight">
-            <span className="text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]">
+        {/* Brand Name Typography */}
+        <div
+          className={`overflow-hidden transition-all duration-1000 ${
+            stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black tracking-tight leading-tight mb-2">
+            <span className="text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.25)]">
               Glady&apos;s{' '}
             </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 drop-shadow-[0_2px_12px_rgba(184,144,71,0.4)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e5c278] via-[#f7e0a7] to-[#b89047] drop-shadow-[0_2px_16px_rgba(184,144,71,0.45)]">
               Heaven
             </span>
           </h1>
         </div>
 
-        {/* Tagline */}
-        <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-[#b89047] font-semibold mb-6 flex items-center justify-center gap-2">
-          <Sparkles size={13} className="text-amber-400 animate-spin-slow" />
-          <span>Travel Beyond Dreams</span>
-          <Sparkles size={13} className="text-amber-400 animate-spin-slow" />
-        </p>
-
-        {/* Dynamic Status Text that shifts across the 10 seconds */}
-        <div className="h-6 mb-8">
-          <p className="text-xs font-light text-slate-300 tracking-wider animate-fade-in-up">
-            {progress < 30 && '✦ Navigating Breathtaking Horizons...'}
-            {progress >= 30 && progress < 60 && '✦ Preparing Curated South India Escapes...'}
-            {progress >= 60 && progress < 85 && '✦ Unlocking India’s Sacred Paths...'}
-            {progress >= 85 && '✦ Welcome to Glady’s Heaven!'}
+        {/* Slogan with Expanding Letter Spacing */}
+        <div
+          className={`transition-all duration-1000 delay-200 ${
+            stage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
+          <p className="text-xs sm:text-sm font-semibold tracking-[0.38em] text-[#b89047] uppercase mb-7 flex items-center justify-center gap-3">
+            <span className="w-6 h-[1px] bg-gradient-to-r from-transparent to-[#b89047]" />
+            <Sparkles size={13} className="text-amber-300 animate-spin-slow" />
+            <span>Travel Beyond Dreams</span>
+            <Sparkles size={13} className="text-amber-300 animate-spin-slow" />
+            <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-[#b89047]" />
           </p>
         </div>
 
-        {/* Glowing Progress Bar with Indicator */}
-        <div className="w-64 sm:w-80 flex flex-col items-center gap-2">
-          <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden p-0.5 border border-white/15 backdrop-blur-md">
+        {/* Dynamic Contextual Telemetry Message */}
+        <div className="h-7 mb-9 flex items-center justify-center">
+          <p className="text-xs sm:text-sm font-light text-slate-300 tracking-wider transition-all duration-500 font-mono">
+            {progress < 25 && '✦ 01/04 &bull; Synchronizing Satellite Coordinates...'}
+            {progress >= 25 && progress < 50 && '✦ 02/04 &bull; Curating South India Paradise Escapes...'}
+            {progress >= 50 && progress < 75 && '✦ 03/04 &bull; Verifying Sacred Pilgrimage Sanctuaries...'}
+            {progress >= 75 && progress < 95 && '✦ 04/04 &bull; Preparing Luxury Chauffeur Fleet...'}
+            {progress >= 95 && '✦ Welcome to Glady’s Heaven • Departure Confirmed!'}
+          </p>
+        </div>
+
+        {/* High-Precision Chrono Progress Bar */}
+        <div className="w-72 sm:w-96 flex flex-col items-center gap-2.5">
+          <div className="relative w-full h-[3px] rounded-full bg-white/10 overflow-visible">
+            {/* Glowing active bar */}
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#1b4332] via-[#2d6a4f] to-[#b89047] shadow-[0_0_12px_#b89047] transition-all duration-100 ease-linear"
+              className="h-full rounded-full bg-gradient-to-r from-[#1b4332] via-[#2d6a4f] to-[#b89047] transition-all duration-75 ease-linear relative"
               style={{ width: `${progress}%` }}
-            />
+            >
+              {/* Leading illuminated head */}
+              <span className="absolute -top-[3px] -right-1 w-2.5 h-2.5 rounded-full bg-amber-300 shadow-[0_0_10px_#e5c278] ring-2 ring-white/40" />
+            </div>
           </div>
 
-          <div className="w-full flex items-center justify-between text-[11px] text-slate-400 font-mono">
-            <span>Loading Experience</span>
-            <span className="text-amber-300 font-bold">{Math.round(progress)}%</span>
+          <div className="w-full flex items-center justify-between text-[11px] text-slate-400 font-mono pt-1">
+            <span className="flex items-center gap-1.5">
+              <Compass size={12} className="text-emerald-400" />
+              <span>INITIALIZING SYSTEM</span>
+            </span>
+            <span className="text-amber-300 font-bold tracking-wider">{Math.round(progress)}%</span>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Coordinates & Watermark */}
+      <div className="absolute bottom-6 left-8 right-8 z-20 flex items-center justify-between text-[10px] text-slate-500 font-mono hidden sm:flex">
+        <span>LAT: 9.9312° N &bull; LON: 76.2673° E [KERALA]</span>
+        <span>LUXURY CONCIERGE &bull; 24/7 SUPPORT</span>
       </div>
     </div>
   );
