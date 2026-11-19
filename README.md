@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dayoff Journeys - Curated Kerala & South India Tour Platform
 
-## Getting Started
+A production-grade, highly responsive travel & tour operator web application built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**, designed and modeled after [Dayoff Journeys](https://www.dayoffjourneys.com/).
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Overview & Core Offerings
+
+**Dayoff Journeys** is a Kerala-based tour operator (headquartered at Chappanangadi, Kottakkal - Perinthalmanna Road, Malappuram) specializing in:
+- **South India Paradise Circuits:** Signature tours covering Munnar's emerald tea hills, Ooty's Nilgiris, and Kodaikanal's serene lakes.
+- **Kerala Backwaters & Serenity:** Munnar, Thekkady wildlife sanctuaries, and private overnight Alleppey houseboats (Kettuvallam).
+- **India's Sacred Paths:** Dedicated spiritual vertical covering Kedarnath, Badrinath, Kashi Vishwanath, Madurai Meenakshi, Rameswaram, and Ajmer Sharif.
+- **Dedicated Chauffeur & Fleet Rentals:** Toyota Innova Crysta, Maruti Dzire, Toyota Etios, Force Tempo Travellers, and Force Urbania luxury vans.
+- **24/7 Ground Support & Transparent Pricing:** Zero hidden costs, local verified chauffeurs, and personalized travel concierges.
+
+---
+
+## 📂 Project Architecture & Folder Structure
+
+```
+├── public/                       # Static public assets (favicons, badges, media)
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── layout.tsx            # Global metadata, SEO tags, and root layout
+│   │   ├── globals.css           # Tailwind CSS directives & custom travel themes
+│   │   ├── page.tsx              # Comprehensive Home Page
+│   │   ├── about/
+│   │   │   └── page.tsx          # About Dayoff Journeys (Kerala roots, values)
+│   │   ├── contact/
+│   │   │   └── page.tsx          # Contact, instant quote, map info & FAQ accordion
+│   │   ├── destinations/
+│   │   │   ├── page.tsx          # Destinations directory (Munnar, Ooty, Kodai, etc.)
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx      # Dynamic SSG destination detail page
+│   │   ├── fleet/
+│   │   │   └── page.tsx          # Transportation & Chauffeur fleet showcase
+│   │   ├── packages/
+│   │   │   ├── page.tsx          # Filterable catalog with search & sorting
+│   │   │   └── [id]/
+│   │   │       ├── page.tsx      # Dynamic SSG tour package page
+│   │   │       └── PackageDetailClient.tsx # Day-by-day accordion & booking logic
+│   │   ├── sacred-paths/
+│   │   │   └── page.tsx          # India's Sacred Paths spiritual showcase
+│   │   └── api/
+│   │       └── inquiry/
+│   │           └── route.ts      # API endpoint for handling quotation requests
+│   │
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── TopBar.tsx        # Announcement, contact details, operating hours
+│   │   │   ├── Navbar.tsx        # Sticky responsive navbar with mobile drawer
+│   │   │   ├── Footer.tsx        # Comprehensive footer with address, links & trust badges
+│   │   │   └── WhatsAppFloat.tsx # Floating WhatsApp conversion button with active ping
+│   │   ├── home/
+│   │   │   ├── HeroSection.tsx   # Atmospheric hero with backdrop & key metrics
+│   │   │   ├── TripSearchWidget.tsx # Multi-factor trip search widget
+│   │   │   ├── FeaturedPackages.tsx # Category-filtered package showcase
+│   │   │   ├── DestinationsGrid.tsx # Top destination preview cards
+│   │   │   ├── SacredPathsHighlight.tsx # India's Sacred Paths highlight section
+│   │   │   ├── WhyChooseUs.tsx   # The 6 core Dayoff Journeys advantages
+│   │   │   ├── FleetShowcase.tsx # Innova Crysta, Dzire, Tempo Traveller showcase
+│   │   │   ├── HowItWorks.tsx    # 4-step seamless booking journey
+│   │   │   ├── Testimonials.tsx  # Verified guest reviews & star ratings
+│   │   │   └── QuickInquirySection.tsx # Direct interactive quotation form
+│   │   ├── packages/
+│   │   │   └── PackageCard.tsx   # Rich package card with pricing, duration & badges
+│   │   ├── destinations/
+│   │   │   └── DestinationCard.tsx # Image destination card with duration & tag
+│   │   └── ui/
+│   │       ├── BookingModal.tsx  # Universal modal with WhatsApp & form quotation
+│   │       ├── SectionHeading.tsx# Reusable badge + title + subtitle component
+│   │       ├── StarRating.tsx    # Accessible SVG star rating component
+│   │       └── Badge.tsx         # Pill badges with multi-color variants
+│   │
+│   ├── data/                     # Single source of truth for realistic content
+│   │   ├── destinations.ts       # Munnar, Ooty, Kodaikanal, Alleppey, Wayanad, Kedarnath, etc.
+│   │   ├── packages.ts           # Complete itineraries, highlights, pricing, inclusions
+│   │   ├── sacredPaths.ts        # Spiritual pilgrimage circuits and sacred shrines
+│   │   ├── fleet.ts              # Vehicle capacities, luggage, features, day tariffs
+│   │   ├── testimonials.ts       # Traveler reviews from families, couples & pilgrims
+│   │   └── faqs.ts               # Frequently asked questions & transparent answers
+│   │
+│   ├── lib/
+│   │   └── utils.ts              # INR formatting, WhatsApp link builder, classNames
+│   └── types/
+│       └── index.ts              # Strict TypeScript interfaces for all entities
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js 18.18+ or 20+ (tested on Node v22.18.0)
+- npm or pnpm
 
-## Learn More
+### Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to explore the website.
 
-To learn more about Next.js, take a look at the following resources:
+### Production Build
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 Design & UX Features
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Branding & Color Scheme:** Deep emerald greens (`#059669`, `#047857`), slate navy darks (`#0f172a`), warm amber gold accents (`#d97706`), reflecting Kerala's tea plantations and tropical serenity.
+- **Conversion Optimization:**
+  - One-click WhatsApp links (`wa.me/919633403404`) pre-filled with context from package titles and custom itineraries.
+  - Interactive multi-step quotation request modals.
+  - Floating WhatsApp action button with animated notification pulse.
+- **Dynamic & Static Routes (SSG):** All 25 routes pre-rendered statically with `generateStaticParams` for instantaneous page loads and SEO scores.
+- **Accessibility & Mobile Responsiveness:** Fully responsive across mobile, tablet, laptop, and ultra-wide screens.
