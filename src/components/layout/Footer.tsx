@@ -60,23 +60,23 @@ export function Footer() {
 
             <div className="space-y-3 text-sm pt-2">
               <a
-                href="mailto:info@dayoffjourneys.com"
+                href="mailto:contact@gladysheaven.com"
                 className="flex items-center gap-3 text-gray-600 hover:text-[#1b4332] transition group"
               >
                 <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-[#e6f4ea] group-hover:text-[#1b4332] transition">
                   <Mail size={15} />
                 </div>
-                <span>info@dayoffjourneys.com</span>
+                <span>contact@gladysheaven.com</span>
               </a>
 
               <a
-                href="tel:+919633403404"
+                href="tel:+919847012345"
                 className="flex items-center gap-3 text-gray-600 hover:text-[#1b4332] transition group"
               >
                 <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-[#e6f4ea] group-hover:text-[#1b4332] transition">
                   <Phone size={15} />
                 </div>
-                <span>+91 96334 03404</span>
+                <span>+91 98470 12345</span>
               </a>
 
               <div className="flex items-start gap-3 text-gray-600 group">
@@ -84,9 +84,9 @@ export function Footer() {
                   <MapPin size={15} />
                 </div>
                 <span className="leading-relaxed">
-                  East Villoor, Indianoor (P.O)<br />
-                  Kottakkal, Malappuram<br />
-                  676503
+                  Level 3, Horizon Grandeur<br />
+                  Marine Drive, Kochi<br />
+                  Kerala 682031
                 </span>
               </div>
             </div>
@@ -199,20 +199,15 @@ export function Footer() {
 
           <p>
             Designed &amp; Developed by{' '}
-            <a
-              href="https://www.thinkforgeglobal.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#2d6a4f] font-semibold hover:underline"
-            >
-              Think Forge Global
-            </a>
+            <span className="text-[#2d6a4f] font-semibold">
+              Ullas Raj
+            </span>
           </p>
 
           {/* Social Icons */}
           <div className="flex items-center space-x-3">
             <a
-              href="https://wa.me/919633403404"
+              href="https://wa.me/919847012345"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#25D366] hover:text-white flex items-center justify-center text-gray-600 transition"

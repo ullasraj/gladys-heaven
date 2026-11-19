@@ -50,7 +50,7 @@ const features = [
     icon: MapPin,
     title: 'Rooted In Kerala, Trusted Nationwide',
     description:
-      'Operating from our Chappanangadi (Kottakkal) headquarters, our deep local connections unlock authentic experiences standard travel portals miss.',
+      'Operating from our Kochi headquarters, our deep local connections unlock authentic experiences standard travel portals miss.',
     color: 'teal',
   },
 ];

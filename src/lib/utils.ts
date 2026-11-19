@@ -7,7 +7,7 @@ export function formatINR(amount: number): string {
 }
 
 export function createWhatsAppLink(message?: string): string {
-  const phone = '919633403404';
+  const phone = '919847012345';
   const defaultText = 'Hello Glady\'s Heaven! I would like to inquire about customized travel packages.';
   const encodedText = encodeURIComponent(message || defaultText);
   return `https://wa.me/${phone}?text=${encodedText}`;

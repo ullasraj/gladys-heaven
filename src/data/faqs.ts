@@ -2,21 +2,21 @@ import { FAQItem } from '@/types';
 
 export const faqsData: FAQItem[] = [
   {
-    question: 'How do I book a tour package with Dayoff Journeys?',
+    question: 'How do I book a tour package with Glady\'s Heaven?',
     answer:
-      'Booking is effortless! You can choose an itinerary directly from our website and click "Book This Package", submit a custom trip inquiry form, or message us directly on WhatsApp at +91 96334 03404. Our travel planners will customize the itinerary to your preferences and provide a clear quotation.',
+      'Booking is effortless! You can choose an itinerary directly from our website and click "Book This Package", submit a custom trip inquiry form, or message us directly on WhatsApp at +91 98470 12345. Our travel planners will customize the itinerary to your preferences and provide a clear quotation.',
     category: 'Booking',
   },
   {
     question: 'Can all itineraries be customized for our family or group?',
     answer:
-      'Yes, 100%! Every package featured on Dayoff Journeys can be tailored according to your travel dates, preferred vehicle category (Sedan, Innova Crysta, Tempo Traveller), resort star ratings, and dietary preferences.',
+      'Yes, 100%! Every package featured on Glady\'s Heaven can be tailored according to your travel dates, preferred vehicle category (Sedan, Innova Crysta, Tempo Traveller), resort star ratings, and dietary preferences.',
     category: 'Customization',
   },
   {
-    question: 'Where is Dayoff Journeys based?',
+    question: 'Where is Glady\'s Heaven based?',
     answer:
-      'Our registered headquarters is located at Door No. 221/A, Kottakkal - Perinthalmanna Road, Chappanangadi, Kerala 676503, India. We operate local coordination offices and dedicated chauffeur networks throughout Kerala, Tamil Nadu, Karnataka, and North Indian pilgrimage corridors.',
+      'Our registered office is located at Level 3, Horizon Grandeur, Marine Drive, Kochi, Kerala 682031, India. We operate local coordination offices and dedicated chauffeur networks throughout Kerala, Tamil Nadu, Karnataka, and North Indian pilgrimage corridors.',
     category: 'Company',
   },
   {

@@ -49,10 +49,10 @@ export default function AboutPage() {
               Rooted in God&apos;s Own Country
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 leading-tight">
-              From Kottakkal&apos;s Ayurvedic Heartland to the Snowy Peaks of the Himalayas
+              From Kerala&apos;s Emerald Hills to the Snowy Peaks of the Himalayas
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Headquartered at <strong>Chappanangadi on the Kottakkal - Perinthalmanna Road in Kerala</strong>, Dayoff Journeys was created to redefine holiday planning for discerning travelers. Unlike impersonal mega-booking portals that push automated cookie-cutter packages, we treat every traveler as a guest in our home.
+              Headquartered at <strong>Horizon Grandeur, Marine Drive in Kochi, Kerala</strong>, Glady&apos;s Heaven was created to redefine holiday planning for discerning travelers. Unlike impersonal mega-booking portals that push automated cookie-cutter packages, we treat every traveler as a guest in our home.
             </p>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               Whether it is sipping freshly plucked tea overlooking the mist-filled valleys of Munnar, cruising silently along the backwater canals of Alleppey on a private Kettuvallam, or seeking blessings at Kedarnath and Kashi Vishwanath, we coordinate every detail with unswerving dedication.
@@ -141,7 +141,7 @@ export default function AboutPage() {
                 Visit Our Office
               </span>
               <h3 className="text-2xl font-bold text-slate-900 mt-1">
-                Dayoff Journeys Headquarters
+                Glady&apos;s Heaven Office
               </h3>
               <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 Drop in for a cup of freshly brewed tea and let our destination designers walk you through custom route maps and exclusive resort collections.
@@ -149,7 +149,7 @@ export default function AboutPage() {
               <div className="mt-6 space-y-3 text-sm text-slate-700">
                 <div className="flex items-start gap-3">
                   <MapPin size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Door No. 221/A, Kottakkal - Perinthalmanna Road, Chappanangadi, Kerala 676503, India</span>
+                  <span>Level 3, Horizon Grandeur, Marine Drive, Kochi, Kerala 682031, India</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Compass size={18} className="text-emerald-600 shrink-0" />

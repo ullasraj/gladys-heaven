@@ -95,7 +95,7 @@ export default function ContactPage() {
                       Office Address
                     </h4>
                     <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                      Door No. 221/A, Kottakkal - Perinthalmanna Road, Chappanangadi, Kerala 676503, India
+                      Level 3, Horizon Grandeur, Marine Drive, Kochi, Kerala 682031, India
                     </p>
                   </div>
                 </div>
@@ -110,10 +110,10 @@ export default function ContactPage() {
                       Direct Phone Line
                     </h4>
                     <a
-                      href="tel:+919633403404"
+                      href="tel:+919847012345"
                       className="text-sm font-bold text-emerald-700 hover:underline block mt-1"
                     >
-                      +91 96334 03404
+                      +91 98470 12345
                     </a>
                     <span className="text-[10px] text-slate-400">Available 9:00 AM - 10:00 PM IST</span>
                   </div>
@@ -129,10 +129,10 @@ export default function ContactPage() {
                       Email Inquiries
                     </h4>
                     <a
-                      href="mailto:info@dayoffjourneys.com"
+                      href="mailto:contact@gladysheaven.com"
                       className="text-sm font-bold text-emerald-700 hover:underline block mt-1"
                     >
-                      info@dayoffjourneys.com
+                      contact@gladysheaven.com
                     </a>
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export default function ContactPage() {
                     <input
                       type="tel"
                       required
-                      placeholder="+91 96334 XXXXX"
+                      placeholder="+91 98470 XXXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"

@@ -248,11 +248,11 @@ export function PackageDetailClient({ pkg }: Props) {
             <div className="pt-4 border-t border-slate-100 text-center">
               <p className="text-xs text-slate-500">Need immediate help?</p>
               <a
-                href="tel:+919633403404"
+                href="tel:+919847012345"
                 className="text-sm font-bold text-slate-800 hover:text-emerald-600 transition flex items-center justify-center gap-1.5 mt-1"
               >
                 <Phone size={14} className="text-emerald-600" />
-                +91 96334 03404
+                +91 98470 12345
               </a>
               <p className="text-[10px] text-slate-400 mt-1">
                 Mon - Sun: 9:00 AM - 10:00 PM IST

@@ -53,7 +53,7 @@ export function QuickInquirySection() {
             <div className="space-y-4 pt-4">
               {/* Phone Card */}
               <a
-                href="tel:+919633403404"
+                href="tel:+919847012345"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
               >
                 <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -64,14 +64,14 @@ export function QuickInquirySection() {
                     Call Us Anytime
                   </span>
                   <span className="text-sm font-bold text-[#111827] group-hover:text-[#1b4332] transition-colors">
-                    +91 96334 03404
+                    +91 98470 12345
                   </span>
                 </div>
               </a>
 
               {/* Email Card */}
               <a
-                href="mailto:info@dayoffjourneys.com"
+                href="mailto:contact@gladysheaven.com"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
               >
                 <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -82,7 +82,7 @@ export function QuickInquirySection() {
                     Send an Email
                   </span>
                   <span className="text-sm font-bold text-[#111827] group-hover:text-[#1b4332] transition-colors">
-                    info@dayoffjourneys.com
+                    contact@gladysheaven.com
                   </span>
                 </div>
               </a>

@@ -10,7 +10,7 @@ export function TopBar() {
         <div className="flex items-center space-x-6">
           <div className="flex items-center gap-1.5">
             <MapPin size={13} className="text-emerald-400" />
-            <span>Kottakkal - Perinthalmanna Road, Chappanangadi, Kerala</span>
+            <span>Horizon Grandeur, Marine Drive, Kochi, Kerala</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Clock size={13} className="text-emerald-400" />
@@ -21,11 +21,11 @@ export function TopBar() {
         {/* Right items */}
         <div className="flex items-center space-x-5">
           <a
-            href="tel:+919633403404"
+            href="tel:+919847012345"
             className="flex items-center gap-1.5 text-slate-200 hover:text-emerald-400 transition-colors"
           >
             <Phone size={13} className="text-emerald-400" />
-            <span className="font-semibold">+91 96334 03404</span>
+            <span className="font-semibold">+91 98470 12345</span>
           </a>
           <a
             href={createWhatsAppLink()}
