@@ -1,75 +1,89 @@
+'use client';
+
 import React from 'react';
-import { Compass, Edit3, ShieldCheck, HeartHandshake } from 'lucide-react';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Search, FileText, Plane, MapPin, Camera } from 'lucide-react';
 
 const steps = [
   {
-    step: '01',
-    icon: Compass,
-    title: 'Choose or Dream Your Trip',
-    description:
-      'Explore our curated packages or tell us where you wish to head—whether the misty hills of Munnar or a sacred temple circuit.',
+    step: '1',
+    icon: Search,
+    title: 'Discover',
+    description: 'Browse curated destinations and packages',
   },
   {
-    step: '02',
-    icon: Edit3,
-    title: 'Customize with Local Experts',
-    description:
-      'Collaborate with our Kerala-based travel planners. Adjust dates, room categories, sightseeing pace, and vehicle preferences freely.',
+    step: '2',
+    icon: FileText,
+    title: 'Plan',
+    description: 'Customize your itinerary with our experts',
   },
   {
-    step: '03',
-    icon: ShieldCheck,
-    title: 'Instant Hassle-Free Confirmation',
-    description:
-      'Lock in your booking with a nominal advance token. Receive instant hotel vouchers, chauffeur details, and digital itinerary.',
+    step: '3',
+    icon: Plane,
+    title: 'Book',
+    description: 'Secure your trip with easy payment options',
   },
   {
-    step: '04',
-    icon: HeartHandshake,
-    title: 'Enjoy Your Day Off!',
-    description:
-      'Arrive stress-free. Your dedicated chauffeur receives you at the airport/station and our 24/7 concierge looks after everything.',
+    step: '4',
+    icon: MapPin,
+    title: 'Travel',
+    description: 'Enjoy 24/7 support during your journey',
+  },
+  {
+    step: '5',
+    icon: Camera,
+    title: 'Remember',
+    description: 'Create memories that last forever',
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeading
-          badge="Seamless Process"
-          title="How Your Journey Unfolds"
-          subtitle="From your initial inquiry to your journey back home, we make vacation planning completely effortless."
-          dark
-        />
+    <section className="py-20 bg-[#f9fafb] border-y border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight">
+            Your Journey with Us
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-gray-600 font-normal">
+            From inspiration to unforgettable memories — we&apos;re with you every step
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {steps.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/60 flex flex-col items-center text-center relative group hover:border-emerald-500/50 transition-all duration-300"
-              >
-                <span className="text-3xl font-black text-emerald-400/30 group-hover:text-emerald-400 transition-colors mb-2">
-                  {item.step}
-                </span>
+        {/* 5-Step Process Timeline */}
+        <div className="relative">
+          {/* Connecting line (visible on lg screens) */}
+          <div className="hidden lg:block absolute top-10 left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-[#2d6a4f]/25 z-0" />
 
-                <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                  <Icon size={24} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4 relative z-10">
+            {steps.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.step} className="flex flex-col items-center text-center group">
+                  {/* Icon Circle Container */}
+                  <div className="relative mb-5">
+                    <div className="w-20 h-20 rounded-full bg-white border-2 border-[#2d6a4f]/30 shadow-md flex items-center justify-center text-[#1b4332] group-hover:scale-110 group-hover:border-[#1b4332] group-hover:bg-[#e6f4ea] transition-all duration-300">
+                      <Icon size={28} className="stroke-[1.8]" />
+                    </div>
+
+                    {/* Number Badge */}
+                    <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-[#1b4332] text-white text-xs font-bold flex items-center justify-center shadow-sm">
+                      {item.step}
+                    </span>
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-base font-bold text-[#111827] mb-1.5">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-gray-500 max-w-[190px] leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-
-                <h3 className="text-lg font-bold text-white mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                  {item.description}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

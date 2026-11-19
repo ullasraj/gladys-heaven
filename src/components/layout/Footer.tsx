@@ -1,218 +1,235 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  Compass,
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  ArrowRight,
-  ShieldCheck,
-  Heart,
-  MessageCircle,
-} from 'lucide-react';
-import { createWhatsAppLink } from '@/lib/utils';
+import Image from 'next/image';
+import { Mail, Phone, MapPin } from 'lucide-react';
+
+const galleryPhotos = [
+  {
+    title: 'Ooty',
+    image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    title: 'Munnar',
+    image: 'https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    title: 'Kodaikanal',
+    image: 'https://images.unsplash.com/photo-1628108426027-3806e30eb120?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    title: 'Tea Gardens',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    title: 'Pine Forest',
+    image: 'https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    title: 'Ooty Lake',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=400&q=80',
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-slate-800">
-          {/* Col 1: Brand Info (2 cols on lg) */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
-                <Compass size={22} className="stroke-[2.2]" />
-              </div>
-              <div>
-                <div className="flex items-center gap-1">
-                  <span className="text-2xl font-black tracking-tight text-white">DAYOFF</span>
-                  <span className="text-2xl font-light text-emerald-400">JOURNEYS</span>
-                </div>
-                <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">
-                  Your Day Off, Perfectly Planned
-                </p>
-              </div>
-            </Link>
+    <footer className="bg-white border-t border-gray-100 text-gray-700 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Top 4 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-gray-100">
+          {/* Column 1: Reach Us */}
+          <div className="space-y-4">
+            <h4 className="text-base font-bold text-[#111827]">Reach Us</h4>
 
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Kerala&apos;s premier personalized tour planner. We transform your holidays into authentic, seamless adventures across South India&apos;s misty hills, tranquil backwaters, and India&apos;s most revered Sacred Paths.
-            </p>
-
-            {/* Quick Contact Badges */}
-            <div className="pt-2 space-y-2 text-xs">
-              <div className="flex items-start gap-2.5 text-slate-400">
-                <MapPin size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-                <span>Door No. 221/A, Kottakkal - Perinthalmanna Road, Chappanangadi, Kerala 676503, India</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-slate-400">
-                <Phone size={16} className="text-emerald-400 shrink-0" />
-                <a href="tel:+919633403404" className="hover:text-white transition">
-                  +91 96334 03404
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5 text-slate-400">
-                <Mail size={16} className="text-emerald-400 shrink-0" />
-                <a href="mailto:info@dayoffjourneys.com" className="hover:text-white transition">
-                  info@dayoffjourneys.com
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5 text-slate-400">
-                <Clock size={16} className="text-emerald-400 shrink-0" />
-                <span>Operating Hours: Monday – Sunday: 9:00 AM – 10:00 PM</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Col 2: Popular Packages */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-emerald-500 pl-2.5">
-              Popular Packages
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link
-                  href="/packages/south-india-paradise"
-                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
-                >
-                  <ArrowRight size={12} className="text-emerald-500" />
-                  South India Paradise
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/packages/kerala-serenity-backwaters"
-                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
-                >
-                  <ArrowRight size={12} className="text-emerald-500" />
-                  Munnar &amp; Alleppey Cruise
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/packages/sacred-paths-chardham-kedarnath"
-                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
-                >
-                  <ArrowRight size={12} className="text-emerald-500" />
-                  Kedarnath &amp; Badrinath Yatra
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/packages/spiritual-south-madurai-rameswaram"
-                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
-                >
-                  <ArrowRight size={12} className="text-emerald-500" />
-                  Madurai &amp; Rameswaram
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/packages/wayanad-wilderness-trails"
-                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
-                >
-                  <ArrowRight size={12} className="text-emerald-500" />
-                  Wayanad Nature &amp; Caves
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Top Destinations */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-emerald-500 pl-2.5">
-              Destinations
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/destinations/munnar" className="hover:text-emerald-400 transition">
-                  Munnar Tea Hills
-                </Link>
-              </li>
-              <li>
-                <Link href="/destinations/ooty" className="hover:text-emerald-400 transition">
-                  Ooty Nilgiris
-                </Link>
-              </li>
-              <li>
-                <Link href="/destinations/kodaikanal" className="hover:text-emerald-400 transition">
-                  Kodaikanal Lake
-                </Link>
-              </li>
-              <li>
-                <Link href="/destinations/alleppey" className="hover:text-emerald-400 transition">
-                  Alleppey Backwaters
-                </Link>
-              </li>
-              <li>
-                <Link href="/destinations/kedarnath" className="hover:text-emerald-400 transition">
-                  Kedarnath Dham
-                </Link>
-              </li>
-              <li>
-                <Link href="/destinations/goa" className="hover:text-emerald-400 transition">
-                  Goa Coastal Haven
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Quick Links & Trust */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-emerald-500 pl-2.5">
-              Company &amp; Services
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-emerald-400 transition">
-                  About Dayoff Journeys
-                </Link>
-              </li>
-              <li>
-                <Link href="/sacred-paths" className="hover:text-emerald-400 transition">
-                  India&apos;s Sacred Paths
-                </Link>
-              </li>
-              <li>
-                <Link href="/fleet" className="hover:text-emerald-400 transition">
-                  Fleet &amp; Chauffeur Rentals
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-emerald-400 transition">
-                  Contact &amp; Custom Quote
-                </Link>
-              </li>
-            </ul>
-
-            <div className="mt-6 pt-4 border-t border-slate-800">
+            <div className="space-y-3 text-sm">
               <a
-                href={createWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-600 hover:text-white transition"
+                href="mailto:info@dayoffjourneys.com"
+                className="flex items-center gap-3 text-gray-600 hover:text-[#1b4332] transition group"
               >
-                <MessageCircle size={14} />
-                WhatsApp Direct Help
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-[#e6f4ea] group-hover:text-[#1b4332] transition">
+                  <Mail size={15} />
+                </div>
+                <span>info@dayoffjourneys.com</span>
               </a>
+
+              <a
+                href="tel:+919633403404"
+                className="flex items-center gap-3 text-gray-600 hover:text-[#1b4332] transition group"
+              >
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-[#e6f4ea] group-hover:text-[#1b4332] transition">
+                  <Phone size={15} />
+                </div>
+                <span>+91 96334 03404</span>
+              </a>
+
+              <div className="flex items-start gap-3 text-gray-600 group">
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 shrink-0 mt-0.5">
+                  <MapPin size={15} />
+                </div>
+                <span className="leading-relaxed">
+                  East Villoor, Indianoor (P.O)<br />
+                  Kottakkal, Malappuram<br />
+                  676503
+                </span>
+              </div>
             </div>
+          </div>
+
+          {/* Column 2: Company */}
+          <div>
+            <h4 className="text-base font-bold text-[#111827] mb-4">Company</h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-gray-600 hover:text-[#1b4332] transition">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Services
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Destinations */}
+          <div>
+            <h4 className="text-base font-bold text-[#111827] mb-4">Destinations</h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/destinations" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Trending Now
+                </Link>
+              </li>
+              <li>
+                <Link href="/destinations" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Spiritual Journeys
+                </Link>
+              </li>
+              <li>
+                <Link href="/destinations" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Explore All
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Support */}
+          <div>
+            <h4 className="text-base font-bold text-[#111827] mb-4">Support</h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/contact" className="text-gray-600 hover:text-[#1b4332] transition">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        {/* Instagram Gallery Row */}
+        <div className="py-12 border-b border-gray-100">
+          <div className="text-center mb-6">
+            <h4 className="text-base font-bold text-[#111827]">
+              Follow Our Adventures{' '}
+              <a
+                href="https://www.instagram.com/dayoffjourneys/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1b4332] hover:underline"
+              >
+                @DayoffJourneys
+              </a>
+            </h4>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {galleryPhotos.map((photo, i) => (
+              <a
+                key={i}
+                href="https://www.instagram.com/dayoffjourneys/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative h-32 rounded-2xl overflow-hidden group shadow-sm block"
+              >
+                <Image
+                  src={photo.image}
+                  alt={photo.title}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 16vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <svg className="w-6 h-6 text-white fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+          <p>&copy; {new Date().getFullYear()} Dayoff Journeys. All rights reserved.</p>
+
           <p>
-            &copy; {new Date().getFullYear()} Dayoff Journeys. All rights reserved. Crafted for extraordinary travel.
+            Designed &amp; Developed by{' '}
+            <a
+              href="https://www.thinkforgeglobal.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2d6a4f] font-semibold hover:underline"
+            >
+              Think Forge Global
+            </a>
           </p>
-          <div className="flex items-center space-x-6">
-            <span className="flex items-center gap-1.5 text-slate-400">
-              <ShieldCheck size={14} className="text-emerald-500" />
-              Verified Local Tour Operator • Kerala
-            </span>
-            <span className="hidden sm:inline">&bull;</span>
-            <span className="flex items-center gap-1 text-slate-400">
-              Made with <Heart size={12} className="text-rose-500 fill-rose-500" /> for travelers
-            </span>
+
+          {/* Social Icons */}
+          <div className="flex items-center space-x-3">
+            <a
+              href="https://wa.me/919633403404"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#25D366] hover:text-white flex items-center justify-center text-gray-600 transition"
+              aria-label="WhatsApp"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.584 1.961.914 3.011.915h.005c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.767-5.768-5.767zm0-1.672c4.103 0 7.44 3.336 7.44 7.439 0 4.103-3.337 7.44-7.44 7.44-1.282 0-2.483-.327-3.541-.937l-4.49 1.176 1.198-4.382c-.7-1.127-1.107-2.457-1.107-3.897 0-4.103 3.337-7.439 7.44-7.439z" />
+              </svg>
+            </a>
+
+            <a
+              href="https://www.facebook.com/share/16ptNx69XY/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#1877F2] hover:text-white flex items-center justify-center text-gray-600 transition"
+              aria-label="Facebook"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+
+            <a
+              href="https://www.instagram.com/dayoffjourneys/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#E1306C] hover:text-white flex items-center justify-center text-gray-600 transition"
+              aria-label="Instagram"
+            >
+              <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>

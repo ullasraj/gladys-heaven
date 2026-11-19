@@ -1,260 +1,222 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Send, Phone, MessageCircle, CheckCircle2, ShieldCheck, MapPin } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  User,
+  MapPin,
+  Calendar,
+  MessageSquare,
+  Sparkles,
+} from 'lucide-react';
 import { createWhatsAppLink } from '@/lib/utils';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export function QuickInquirySection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    destination: 'Munnar & South India Paradise',
-    travelDate: '',
-    travelers: '2 Adults',
-    budget: 'Standard (3 Star Comfort)',
-    message: '',
-  });
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [destination, setDestination] = useState('Munnar, Kerala');
+  const [travelDates, setTravelDates] = useState('');
+  const [message, setMessage] = useState('');
 
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleStartWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      setSubmitted(true);
-    } catch {
-      setSubmitted(true);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleWhatsApp = () => {
-    const text = `Hello Dayoff Journeys! I would like to get a quote for a custom trip.\nName: ${formData.name || 'Traveler'}\nDestination: ${formData.destination}\nTravel Date: ${formData.travelDate || 'Flexible'}\nTravelers: ${formData.travelers}\nNotes: ${formData.message || 'Please send customized package details.'}`;
+    const fullName = `${firstName} ${lastName}`.trim() || 'Traveler';
+    const text = `Hello Dayoff Journeys! I would like to plan my vacation with you.\nName: ${fullName}\nDestination: ${destination}\nTravel Dates: ${travelDates || 'Flexible'}\nNotes: ${message || 'Please send customized package details.'}`;
     window.open(createWhatsAppLink(text), '_blank');
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-emerald-900 via-teal-950 to-slate-950 text-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="booking-section" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left copy */}
+          {/* Left Column (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold uppercase tracking-wider">
-              Free Itinerary Planning
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-              Ready to Escape? Plan Your Custom Vacation in 2 Minutes.
+            {/* Live Available Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e6f4ea] text-[#1b4332] text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#2d6a4f] animate-ping" />
+              <span>Available Now</span>
+            </div>
+
+            {/* Headline */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] leading-[1.15] tracking-tight">
+              Ready for your <br />
+              <span className="text-[#1b4332]">Dream Vacation?</span>
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Tell us your destination dreams and travel style. Our Kerala holiday specialists will craft a customized itinerary with transparent pricing within a few hours.
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed">
+              Let us handle the planning while you pack your bags. We&apos;re just a message away from starting your next adventure.
             </p>
 
-            <div className="pt-2 space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                  <ShieldCheck size={18} />
+            {/* Contact Quick Cards */}
+            <div className="space-y-4 pt-4">
+              {/* Phone Card */}
+              <a
+                href="tel:+919633403404"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">Zero Obligation, 100% Free</h4>
-                  <p className="text-xs text-slate-400">Receive an itemized quote with no hidden booking fees.</p>
+                  <span className="text-xs text-gray-500 font-medium block">
+                    Call Us Anytime
+                  </span>
+                  <span className="text-sm font-bold text-[#111827] group-hover:text-[#1b4332] transition-colors">
+                    +91 96334 03404
+                  </span>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                  <Phone size={18} />
+              {/* Email Card */}
+              <a
+                href="mailto:info@dayoffjourneys.com"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">Direct WhatsApp &amp; Phone Line</h4>
-                  <p className="text-xs text-slate-400">Call our Chappanangadi office anytime at +91 96334 03404.</p>
+                  <span className="text-xs text-gray-500 font-medium block">
+                    Send an Email
+                  </span>
+                  <span className="text-sm font-bold text-[#111827] group-hover:text-[#1b4332] transition-colors">
+                    info@dayoffjourneys.com
+                  </span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
-          {/* Right form card */}
-          <div className="lg:col-span-7 bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl">
-            {submitted ? (
-              <div className="text-center py-12">
-                <CheckCircle2 size={56} className="text-emerald-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-slate-900">Quotation Request Sent!</h3>
-                <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto">
-                  Thank you! Our travel planner is preparing your customized itinerary and will get back to you at <strong>{formData.phone}</strong> shortly.
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                  <button
-                    onClick={handleWhatsApp}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold hover:bg-emerald-700 transition"
-                  >
-                    <MessageCircle size={18} />
-                    Continue on WhatsApp
-                  </button>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="px-6 py-3 bg-slate-100 text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-200 transition"
-                  >
-                    Send Another Request
-                  </button>
-                </div>
+          {/* Right Column ("Send a Request" Card - 7 cols) */}
+          <div className="lg:col-span-7">
+            <div className="bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
+              {/* Watermark Chat Icon */}
+              <div className="absolute -top-6 -right-6 text-gray-100 pointer-events-none">
+                <MessageSquare size={140} />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold text-[#111827] mb-6">
+                  Send a Request
+                </h3>
+
+                <form onSubmit={handleStartWhatsApp} className="space-y-4">
+                  {/* First & Last Name */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        First Name
+                      </label>
+                      <div className="relative">
+                        <User size={16} className="absolute left-3.5 top-3.5 text-gray-400" />
+                        <input
+                          type="text"
+                          required
+                          placeholder="John"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Last Name
+                      </label>
+                      <div className="relative">
+                        <User size={16} className="absolute left-3.5 top-3.5 text-gray-400" />
+                        <input
+                          type="text"
+                          required
+                          placeholder="Doe"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Destination */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Full Name *
+                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                      Destination
                     </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Priya Sharma"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    <div className="relative">
+                      <MapPin size={16} className="absolute left-3.5 top-3.5 text-gray-400" />
+                      <select
+                        value={destination}
+                        onChange={(e) => setDestination(e.target.value)}
+                        className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition cursor-pointer"
+                      >
+                        <option value="Munnar, Kerala">Munnar, Kerala</option>
+                        <option value="Kodaikanal, Tamil Nadu">Kodaikanal, Tamil Nadu</option>
+                        <option value="Ooty, Tamil Nadu">Ooty, Tamil Nadu</option>
+                        <option value="Alleppey Backwaters, Kerala">Alleppey Backwaters, Kerala</option>
+                        <option value="Wayanad, Kerala">Wayanad, Kerala</option>
+                        <option value="South India Paradise (Munnar + Ooty + Kodai)">
+                          South India Paradise (Munnar + Ooty + Kodai)
+                        </option>
+                        <option value="Kedarnath & Chardham (Sacred Paths)">
+                          Kedarnath &amp; Chardham (Sacred Paths)
+                        </option>
+                        <option value="Kashi Vishwanath, Varanasi">Kashi Vishwanath, Varanasi</option>
+                        <option value="Madurai & Rameswaram">Madurai &amp; Rameswaram</option>
+                        <option value="Goa Beaches & Heritage">Goa Beaches &amp; Heritage</option>
+                        <option value="Custom Multiple Destinations">Custom Multiple Destinations</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Travel Dates */}
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                      Travel Dates
+                    </label>
+                    <div className="relative">
+                      <Calendar size={16} className="absolute left-3.5 top-3.5 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Pick a date range (e.g. Next Month / Oct 15 - 20)"
+                        value={travelDates}
+                        onChange={(e) => setTravelDates(e.target.value)}
+                        className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                      Message
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="Tell us more about your preferences (e.g. number of people, accommodation style, etc.)..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full p-3.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition resize-none"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Phone / WhatsApp *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 96334 XXXXX"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="priya@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Preferred Destination
-                    </label>
-                    <select
-                      value={formData.destination}
-                      onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-md shadow-[#25D366]/20 transition-all flex items-center justify-center gap-2.5 active:scale-98"
                     >
-                      <option value="South India Paradise (Munnar, Ooty, Kodai)">
-                        South India Paradise (Munnar, Ooty, Kodai)
-                      </option>
-                      <option value="Munnar & Alleppey Backwaters">Munnar &amp; Alleppey Backwaters</option>
-                      <option value="Kedarnath & Chardham Sacred Path">Kedarnath &amp; Chardham Sacred Path</option>
-                      <option value="Wayanad Rainforests & Waterfalls">Wayanad Rainforests &amp; Waterfalls</option>
-                      <option value="Madurai & Rameswaram Temple Trail">Madurai &amp; Rameswaram Temple Trail</option>
-                      <option value="Goa Beaches & Heritage">Goa Beaches &amp; Heritage</option>
-                      <option value="Custom Multiple Destinations">Custom Multiple Destinations</option>
-                    </select>
+                      <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.584 1.961.914 3.011.915h.005c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.767-5.768-5.767zm0-1.672c4.103 0 7.44 3.336 7.44 7.439 0 4.103-3.337 7.44-7.44 7.44-1.282 0-2.483-.327-3.541-.937l-4.49 1.176 1.198-4.382c-.7-1.127-1.107-2.457-1.107-3.897 0-4.103 3.337-7.439 7.44-7.439z" />
+                      </svg>
+                      <span>Start Chat on WhatsApp</span>
+                    </button>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Travel Date
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.travelDate}
-                      onChange={(e) => setFormData({ ...formData, travelDate: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Travelers Count
-                    </label>
-                    <select
-                      value={formData.travelers}
-                      onChange={(e) => setFormData({ ...formData, travelers: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
-                    >
-                      <option value="1 Solo Traveler">1 Solo Traveler</option>
-                      <option value="2 Adults (Couple)">2 Adults (Couple)</option>
-                      <option value="3-4 Family Members">3-4 Family Members</option>
-                      <option value="5-8 Group">5-8 Group</option>
-                      <option value="9+ Big Group">9+ Big Group</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Hotel Category
-                    </label>
-                    <select
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
-                    >
-                      <option value="Budget Friendly">Budget Friendly</option>
-                      <option value="Standard (3 Star Comfort)">Standard (3 Star Comfort)</option>
-                      <option value="Deluxe (4 Star Resorts)">Deluxe (4 Star Resorts)</option>
-                      <option value="Luxury (5 Star / Heritage)">Luxury (5 Star / Heritage)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Special Requests or Questions
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder="e.g. Interested in Innova Crysta, candle-light dinner on houseboat, pickup from Coimbatore..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full p-3 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
-                  />
-                </div>
-
-                <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold text-sm shadow-md transition disabled:opacity-50 flex items-center justify-center gap-2"
-                  >
-                    <Send size={16} />
-                    <span>{isSubmitting ? 'Submitting...' : 'Request Free Detailed Itinerary'}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleWhatsApp}
-                    className="py-3.5 px-5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-sm transition flex items-center justify-center gap-2"
-                  >
-                    <MessageCircle size={16} className="text-emerald-600" />
-                    <span>Chat on WhatsApp</span>
-                  </button>
-                </div>
-              </form>
-            )}
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

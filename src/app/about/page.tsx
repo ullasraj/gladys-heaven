@@ -11,7 +11,6 @@ import {
   Sparkles,
   ArrowRight,
 } from 'lucide-react';
-import { TopBar } from '@/components/layout/TopBar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
@@ -24,8 +23,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
-      <TopBar />
+    <div className="flex flex-col min-h-screen bg-white">
       <Navbar />
 
       {/* Hero Banner */}
