@@ -27,21 +27,26 @@ export function QuickInquirySection() {
   };
 
   return (
-    <section id="booking-section" className="py-20 bg-white">
+    <section id="booking-section" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Live Available Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e6f4ea] text-[#1b4332] text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#2d6a4f] animate-ping" />
-              <span>Available Now</span>
+            {/* Live Available Badge with Dual Pulse */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#e6f4ea] text-[#1b4332] text-xs font-semibold shadow-xs">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+              </span>
+              <span>Available Now &bull; Instant Response</span>
             </div>
 
             {/* Headline */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] leading-[1.15] tracking-tight">
               Ready for your <br />
-              <span className="text-[#1b4332]">Dream Vacation?</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1b4332] via-[#2d6a4f] to-[#b89047]">
+                Dream Vacation?
+              </span>
             </h2>
 
             {/* Subtitle */}
@@ -49,14 +54,14 @@ export function QuickInquirySection() {
               Let us handle the planning while you pack your bags. We&apos;re just a message away from starting your next adventure.
             </p>
 
-            {/* Contact Quick Cards */}
+            {/* Contact Quick Cards with hover lift & glow */}
             <div className="space-y-4 pt-4">
               {/* Phone Card */}
               <a
                 href="tel:+919847012345"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#1b4332] group-hover:text-white transition-all duration-300">
                   <Phone size={20} />
                 </div>
                 <div>
@@ -72,9 +77,9 @@ export function QuickInquirySection() {
               {/* Email Card */}
               <a
                 href="mailto:contact@gladysheaven.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/30 hover:shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-[#f9fafb] border border-gray-100 hover:border-[#1b4332]/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-[#e6f4ea] text-[#1b4332] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#1b4332] group-hover:text-white transition-all duration-300">
                   <Mail size={20} />
                 </div>
                 <div>
@@ -89,17 +94,18 @@ export function QuickInquirySection() {
             </div>
           </div>
 
-          {/* Right Column ("Send a Request" Card - 7 cols) */}
+          {/* Right Column ("Send a Request" Card - 7 cols) with soft shadow & interactive focus */}
           <div className="lg:col-span-7">
-            <div className="bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
-              {/* Watermark Chat Icon */}
-              <div className="absolute -top-6 -right-6 text-gray-100 pointer-events-none">
-                <MessageSquare size={140} />
+            <div className="group/form bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+              {/* Animated Watermark Chat Icon */}
+              <div className="absolute -top-6 -right-6 text-gray-100/80 group-hover/form:text-emerald-50 transition-colors duration-500 pointer-events-none transform group-hover/form:rotate-6 transition-transform">
+                <MessageSquare size={150} />
               </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-[#111827] mb-6">
-                  Send a Request
+                <h3 className="text-2xl font-bold text-[#111827] mb-6 flex items-center gap-2">
+                  <span>Send a Request</span>
+                  <Sparkles size={18} className="text-[#b89047]" />
                 </h3>
 
                 <form onSubmit={handleStartWhatsApp} className="space-y-4">
@@ -117,7 +123,7 @@ export function QuickInquirySection() {
                           placeholder="John"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
-                          className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                          className="w-full pl-10 pr-3.5 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -134,7 +140,7 @@ export function QuickInquirySection() {
                           placeholder="Doe"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
-                          className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                          className="w-full pl-10 pr-3.5 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -150,7 +156,7 @@ export function QuickInquirySection() {
                       <select
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
-                        className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition cursor-pointer"
+                        className="w-full pl-10 pr-3.5 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition-all duration-200 cursor-pointer"
                       >
                         <option value="Munnar, Kerala">Munnar, Kerala</option>
                         <option value="Kodaikanal, Tamil Nadu">Kodaikanal, Tamil Nadu</option>
@@ -183,7 +189,7 @@ export function QuickInquirySection() {
                         placeholder="Pick a date range (e.g. Next Month / Oct 15 - 20)"
                         value={travelDates}
                         onChange={(e) => setTravelDates(e.target.value)}
-                        className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition"
+                        className="w-full pl-10 pr-3.5 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition-all duration-200"
                       />
                     </div>
                   </div>
@@ -198,15 +204,15 @@ export function QuickInquirySection() {
                       placeholder="Tell us more about your preferences (e.g. number of people, accommodation style, etc.)..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full p-3.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition resize-none"
+                      className="w-full p-3.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#1b4332] focus:border-transparent outline-none transition-all duration-200 resize-none"
                     />
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit Button with Hover Bounce & Scale */}
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-md shadow-[#25D366]/20 transition-all flex items-center justify-center gap-2.5 active:scale-98"
+                      className="w-full py-4 px-6 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-lg shadow-[#25D366]/25 hover:shadow-xl hover:shadow-[#25D366]/35 transition-all duration-300 flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
                         <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.584 1.961.914 3.011.915h.005c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.767-5.768-5.767zm0-1.672c4.103 0 7.44 3.336 7.44 7.439 0 4.103-3.337 7.44-7.44 7.44-1.282 0-2.483-.327-3.541-.937l-4.49 1.176 1.198-4.382c-.7-1.127-1.107-2.457-1.107-3.897 0-4.103 3.337-7.439 7.44-7.439z" />

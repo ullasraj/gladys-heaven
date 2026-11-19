@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 
 const faqs = [
   {
@@ -39,15 +39,18 @@ export function FAQSection() {
   };
 
   return (
-    <section className="py-20 bg-[#f9fafb] border-t border-gray-100">
+    <section className="py-24 bg-[#f9fafb] border-t border-gray-100 relative">
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight">
+        <div className="text-center mb-16">
+          <span className="inline-block px-3.5 py-1 rounded-full bg-[#e6f4ea] text-[#1b4332] text-xs font-semibold uppercase tracking-wider mb-3">
+            Got Questions?
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-gray-600 font-normal">
-            Quick answers to common questions
+          <p className="mt-3 text-sm sm:text-base text-gray-600 font-normal">
+            Quick answers to common questions about your holiday
           </p>
         </div>
 
@@ -58,25 +61,36 @@ export function FAQSection() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-gray-200/80 overflow-hidden transition-all shadow-sm"
+                className={`bg-white rounded-2xl border transition-all duration-300 shadow-xs hover:shadow-md ${
+                  isOpen
+                    ? 'border-[#1b4332]/40 shadow-sm ring-1 ring-[#1b4332]/10'
+                    : 'border-gray-200/80 hover:border-gray-300'
+                }`}
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 transition hover:bg-gray-50/70"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 transition cursor-pointer select-none"
                 >
-                  <span className="font-bold text-sm sm:text-base text-[#111827]">
+                  <span
+                    className={`font-bold text-sm sm:text-base transition-colors duration-200 ${
+                      isOpen ? 'text-[#1b4332]' : 'text-[#111827]'
+                    }`}
+                  >
                     {faq.question}
                   </span>
-                  <ChevronDown
-                    size={20}
-                    className={`text-gray-400 shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-[#1b4332]' : ''
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      isOpen
+                        ? 'bg-[#e6f4ea] text-[#1b4332] rotate-180'
+                        : 'bg-gray-100 text-gray-400'
                     }`}
-                  />
+                  >
+                    <ChevronDown size={18} />
+                  </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-100 animate-fade-in">
+                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-100/80 animate-fade-in-up">
                     {faq.answer}
                   </div>
                 )}
