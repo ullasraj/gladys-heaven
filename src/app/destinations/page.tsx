@@ -4,7 +4,7 @@ import { Download, FileSpreadsheet } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
-import { getAllDestinations } from '@/lib/destinationsLoader';
+import { fetchDestinationsFromGoogleSheet } from '@/lib/googleSheetsDestinations';
 import { DestinationCard } from '@/components/destinations/DestinationCard';
 
 export const metadata = {
@@ -13,8 +13,8 @@ export const metadata = {
     'Discover Munnar, Ooty, Kodaikanal, Alleppey, Wayanad, Kedarnath, and more. Authentic destinations curated for your perfect day off.',
 };
 
-export default function DestinationsPage() {
-  const destinations = getAllDestinations();
+export default async function DestinationsPage() {
+  const destinations = await fetchDestinationsFromGoogleSheet();
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -46,7 +46,7 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      {/* Destinations Grid */}
+      {/* Destinations Grid (Live from Google Sheet) */}
       <section className="py-16 max-w-7xl mx-auto px-6 md:px-12 flex-1 w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {destinations.map((dest) => (

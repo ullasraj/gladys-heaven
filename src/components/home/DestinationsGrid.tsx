@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { Sun, ArrowRight, Download } from 'lucide-react';
-import { getFeaturedDestinations } from '@/lib/destinationsLoader';
+import { fetchDestinationsFromGoogleSheet } from '@/lib/googleSheetsDestinations';
 import { DestinationCard } from '@/components/destinations/DestinationCard';
 
-export function DestinationsGrid() {
-  const destinations = getFeaturedDestinations();
+export async function DestinationsGrid() {
+  const allDestinations = await fetchDestinationsFromGoogleSheet();
+  const featured = allDestinations.filter((d: any) => d.featured === true);
+  const destinations = featured.length > 0 ? featured.slice(0, 3) : allDestinations.slice(0, 3);
 
   return (
     <section className="py-20 bg-white">
@@ -26,7 +28,7 @@ export function DestinationsGrid() {
           </p>
         </div>
 
-        {/* 3 Destination Cards (Powered by Excel data with null-safety) */}
+        {/* 3 Destination Cards (Loaded Live from your Google Sheet) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {destinations.map((dest) => (
             <DestinationCard key={dest.slug} destination={dest} />
@@ -48,10 +50,10 @@ export function DestinationsGrid() {
             href="/destinations_sample.xlsx"
             download="destinations_sample.xlsx"
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition"
-            title="Download the template Excel sheet used for destination cards"
+            title="Download template Excel sheet"
           >
             <Download size={16} />
-            <span>Download Sample Excel Sheet (.xlsx)</span>
+            <span>Download Template Excel Sheet (.xlsx)</span>
           </a>
         </div>
       </div>
