@@ -155,12 +155,12 @@ export function Footer() {
             <h4 className="text-base font-bold text-[#111827]">
               Follow Our Adventures{' '}
               <a
-                href="https://www.instagram.com/gladysheaven/"
+                href="https://www.instagram.com/gladys_heaven"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#1b4332] hover:underline"
               >
-                @GladysHeaven
+                @gladys_heaven
               </a>
             </h4>
           </div>
@@ -169,7 +169,7 @@ export function Footer() {
             {galleryPhotos.map((photo, i) => (
               <a
                 key={i}
-                href="https://www.instagram.com/dayoffjourneys/"
+                href="https://www.instagram.com/gladys_heaven"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative h-32 rounded-2xl overflow-hidden group shadow-sm block"
@@ -231,7 +231,7 @@ export function Footer() {
             </a>
 
             <a
-              href="https://www.instagram.com/dayoffjourneys/"
+              href="https://www.instagram.com/gladys_heaven"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#E1306C] hover:text-white flex items-center justify-center text-gray-600 transition"
